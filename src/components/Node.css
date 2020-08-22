@@ -1,0 +1,46 @@
+.node {
+  height: 25px;
+  width: 25px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #003153;
+  display: inline-block;
+  margin-top: -3px;
+  cursor: pointer;
+}
+
+.node-start {
+  background: url(../images/nagetier.png) no-repeat center;
+  height: 25px;
+  width: 25px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #003153;
+  display: inline-block;
+  margin-top: -3px;
+  cursor: pointer;
+}
+
+.node-end {
+  background: url(../images/kaese.png) no-repeat center;
+  height: 25px;
+  width: 25px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #003153;
+  display: inline-block;
+  margin-top: -3px;
+  cursor: pointer;
+}
+
+.node-wall {
+  background-color: #003153;
+  height: 25px;
+  width: 25px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #003153;
+  display: inline-block;
+  margin-top: -3px;
+  cursor: pointer;
+}
