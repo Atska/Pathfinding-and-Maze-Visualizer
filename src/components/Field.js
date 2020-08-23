@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Node from "./Node";
 // CSS
 import "./Field.css";
+// Algorithms
+// import "../algos/dijkstras";
 
 class Field extends Component {
   state = {
@@ -42,30 +44,27 @@ class Field extends Component {
       this.setState({ endNodeExists: false });
     }
     // set walls
-    if (endNodeExists && startNodeExits && !end && !start && !wall) {
-      let newGraph = setWall(graph, row, column);
-      this.setState({ graph: newGraph });
-    }
-    // delete walls
-    if (
-      endNodeExists &&
-      startNodeExits &&
-      mouseIsClicked &&
-      !end &&
-      !start &&
-      wall
-    ) {
-      let newGraph = deleteWall(graph, row, column);
-      this.setState({ graph: newGraph });
-    }
   };
 
   onMouseDown = (row, column) => {
-    const { startNodeExits, endNodeExists, graph } = this.state;
+    const { startNodeExits, endNodeExists, graph, mouseIsClicked } = this.state;
     const { start, end, wall } = graph[row][column];
-    if (endNodeExists && startNodeExits && !end && !start && !wall) {
+    // if node isnt a wall -> setup the wall
+    if (
+      endNodeExists &&
+      startNodeExits &&
+      !mouseIsClicked &&
+      !end &&
+      !start &&
+      !wall
+    ) {
       let newGraph = setWall(graph, row, column);
       this.setState({ graph: newGraph, mouseIsClicked: true });
+    }
+    // if node is a wall -> delete wall
+    if (endNodeExists && startNodeExits && !end && !start && wall) {
+      let newGraph = deleteWall(graph, row, column);
+      this.setState({ graph: newGraph });
     }
   };
 
@@ -92,6 +91,8 @@ class Field extends Component {
       endNodeExists: false,
     });
   }
+
+  visualizeDijkstras() {}
 
   render() {
     const { graph } = this.state;
