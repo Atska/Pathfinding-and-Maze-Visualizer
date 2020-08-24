@@ -4,6 +4,8 @@ import Node from "./Node";
 // CSS
 import "./Field.css";
 // Algorithms
+import "../algos/dijkstras";
+import { dijkstras } from "../algos/dijkstras";
 // import "../algos/dijkstras";
 
 class Field extends Component {
@@ -12,6 +14,8 @@ class Field extends Component {
     startNodeExits: false,
     endNodeExists: false,
     mouseIsClicked: false,
+    startNode: null,
+    endNode: null,
   };
 
   componentDidMount() {
@@ -20,28 +24,28 @@ class Field extends Component {
   }
 
   onClick = (row, column) => {
-    const { startNodeExits, endNodeExists, graph, mouseIsClicked } = this.state;
-    const { start, end, wall } = graph[row][column];
+    const { startNodeExits, endNodeExists, graph } = this.state;
+    const { start, end } = graph[row][column];
 
     // set start node
     if (!startNodeExits) {
       setStartNode(graph, row, column);
-      this.setState({ startNodeExits: true });
+      this.setState({ startNodeExits: true, startNode: graph[row][column] });
     }
     // delete start node
     if (startNodeExits && start) {
       deleteStartNode(graph, row, column);
-      this.setState({ startNodeExits: false });
+      this.setState({ startNodeExits: false, startNode: null });
     }
     // set end node
     if (!endNodeExists && startNodeExits && !start) {
       setEndNode(graph, row, column);
-      this.setState({ endNodeExists: true });
+      this.setState({ endNodeExists: true, endNode: graph[row][column] });
     }
     // delete end node
     if (endNodeExists && setStartNode && end && !start) {
       deleteEndNode(graph, row, column);
-      this.setState({ endNodeExists: false });
+      this.setState({ endNodeExists: false, endNode: null });
     }
     // set walls
   };
@@ -92,11 +96,17 @@ class Field extends Component {
     });
   }
 
-  visualizeDijkstras() {}
+  visualizeDijkstras() {
+    const { graph, startNode, endNode } = this.state;
+    if ((graph, startNode, endNode)) {
+      return console.log(dijkstras(graph, startNode, endNode));
+    }
+  }
 
   render() {
-    const { graph } = this.state;
+    const { graph, startNode, endNode } = this.state;
     // create the board.
+    this.visualizeDijkstras();
     let board = graph.map((row, rowIndex) => {
       return (
         // each row must be in a div so you can form a field in css

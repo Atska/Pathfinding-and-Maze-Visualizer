@@ -1,33 +1,16 @@
+/* eslint-disable array-callback-return */
 import PriorityQueue from "../utils/PriorityQueue.mjs";
 
-const createGraph = () => {
-  const graph = [];
-  let rowSize = 10;
-  let colSize = 10;
-  // create a 2D Array
-  for (let row = 0; row < rowSize; row++) {
-    const currentRow = [];
-    for (let column = 0; column < colSize; column++) {
-      // create an object with node coordinates. Starts and end return a true bool when they hit the coordinates
-      currentRow.push(createNode(row, column));
-    }
-    graph.push(currentRow);
-  }
-  return graph;
-};
-
-const createNode = (row, column) => {
-  const nodeSchema = {
-    row: row,
-    column: column,
-    wall: false,
-    start: false,
-    end: false,
-  };
-  return nodeSchema;
-};
-
-const dijkstras = (graph, startNode, endNode) => {
+/**
+ * Dijkstras shortest path algorithm
+ * Node object -> { row: row, column: column, wall: false, start: false, end: false };
+ * @param {*} graph 2D Array matrix of node objects
+ * @param {*} startNode Node object with start = true
+ * @param {*} endNode Node object with end = true
+ * @returns Coordinates [row, column] of the shortest path nodes in an Array
+ *          If there is no shortest path because of walls than returns empty array
+ */
+export const dijkstras = (graph, startNode, endNode) => {
   if (!graph || !startNode || !endNode) return false;
   const end = [endNode.row, endNode.column];
   let prevNode = {};
@@ -35,20 +18,21 @@ const dijkstras = (graph, startNode, endNode) => {
   const result = [];
   // setUp distances grid in a hashmap -> distanceMap[[0, 0]]
   // setUp queue with the startNode
-  const distanceMap = setUpDistancesAndQueue(graph, queue);
-  //console.log(distanceMap);
+  const distanceMap = setUpDistancesAndQueue(graph, queue, startNode);
   // while nodes to visit still exists
   while (queue.values.length) {
-    // get the first value from the queue array -> currentNode [row, col] -> [1, 1]
     let curr_node = queue.dequeue().val;
-    // if wall continue
-    if (graph[(curr_node[0], curr_node[1])].wall) continue;
-    // Check if current node is the end node -> finish
+    // if wall skip it and continue
+    if (graph[curr_node[0]][curr_node[1]].wall === true) continue;
+    // EndCondition: Check if current node is the end node -> finish
     if (equalityChecker(curr_node, end)) {
+      // traverse the prevNode object to get all coordinates in an Array
       while (prevNode[curr_node]) {
         result.push(curr_node);
         curr_node = prevNode[curr_node];
       }
+      // Order the array from start to end node
+      result.reverse();
       break;
     }
 
@@ -66,13 +50,15 @@ const dijkstras = (graph, startNode, endNode) => {
       }
     }
   }
-  return result.reverse();
+  return result;
 };
 
 /**
- *
+ * Based on graph, sets up equivalent Array consisting
+ * @param {*} graph 2D graph consisting of node objects
+ * @param {*} queue PriorityQueue as an Array
  */
-const setUpDistancesAndQueue = (graph, queue) => {
+const setUpDistancesAndQueue = (graph, queue, startNode) => {
   let distances = {};
   graph.map((row, rowIndex) => {
     return row.map((node, nodeIndex) => {
@@ -90,7 +76,10 @@ const setUpDistancesAndQueue = (graph, queue) => {
 };
 
 /**
- * Returns an array of the coordinates of the neighboring nodes
+ * Gets the values of the coordinates of neighboring nodes
+ * @param {*} curr_node Current node object
+ * @param {*} graph 2D graph consisting of node objects
+ * @returns Array of all the valid coordinates [row, column] of neighboring nodes in an array
  */
 const getNeighbors = (curr_node, graph) => {
   // find neighboring nodes; current[0] = row; currentrow[1] = column
@@ -109,33 +98,13 @@ const getNeighbors = (curr_node, graph) => {
   return neighbors;
 };
 
+/**
+ * Compares two array
+ * @param {*} arr1 Array with two values -> [3, 3]
+ * @param {*} arr2 Array with two values -> [3, 3]
+ * @returns Boolean; If array values are same -> true else -> false
+ */
 const equalityChecker = (arr1, arr2) => {
   if (arr1[0] === arr2[0] && arr1[1] === arr2[1]) return true;
   return false;
 };
-
-/**
- * Main
- */
-const graph = createGraph();
-
-const endNode = {
-  row: 1,
-  column: 1,
-  wall: false,
-  start: false,
-  end: true,
-};
-const startNode = {
-  row: 8,
-  column: 8,
-  wall: false,
-  start: true,
-  end: false,
-};
-graph[8][8] = startNode;
-graph[1][1] = endNode;
-//console.log(graph);
-//dijkstras(graph, startNode, endNode);
-console.log(dijkstras(graph, startNode, endNode));
-//console.log(graph);
