@@ -1,6 +1,3 @@
-/* eslint-disable array-callback-return */
-import PriorityQueue from "../utils/PriorityQueue.mjs";
-
 /**
  * Dijkstras shortest path algorithm
  * Node object -> { row: row, column: column, wall: false, start: false, end: false };
@@ -12,16 +9,18 @@ import PriorityQueue from "../utils/PriorityQueue.mjs";
  */
 export const dijkstras = (graph, startNode, endNode) => {
   if (!graph || !startNode || !endNode) return false;
+  const start = [startNode.row, startNode.column];
   const end = [endNode.row, endNode.column];
   let prevNode = {};
-  let queue = new PriorityQueue();
+  let queue = [start];
   const result = [];
+  const allNeighbors = [];
   // setUp distances grid in a hashmap -> distanceMap[[0, 0]]
-  // setUp queue with the startNode
-  const distanceMap = setUpDistancesAndQueue(graph, queue, startNode);
+  const distanceMap = setUpDistances(graph, startNode);
   // while nodes to visit still exists
-  while (queue.values.length) {
-    let curr_node = queue.dequeue().val;
+
+  while (queue.length) {
+    let curr_node = queue.shift();
     // if wall skip it and continue
     if (graph[curr_node[0]][curr_node[1]].wall === true) continue;
     // EndCondition: Check if current node is the end node -> finish
@@ -37,6 +36,7 @@ export const dijkstras = (graph, startNode, endNode) => {
     }
 
     if (curr_node || distanceMap[curr_node] !== Infinity) {
+      allNeighbors.push(curr_node);
       // gets an array of neighbors
       let neighborList = getNeighbors(curr_node, graph);
       for (let i = 0; i < neighborList.length; i++) {
@@ -45,12 +45,12 @@ export const dijkstras = (graph, startNode, endNode) => {
         if (sum_distance < distanceMap[neighborList[i]]) {
           distanceMap[neighborList[i]] = sum_distance;
           prevNode[neighborList[i]] = curr_node;
-          queue.enqueue(neighborList[i], 1);
+          queue.push(neighborList[i]);
         }
       }
     }
   }
-  return result;
+  return { shortestPath: result, neighborList: allNeighbors };
 };
 
 /**
@@ -58,17 +58,15 @@ export const dijkstras = (graph, startNode, endNode) => {
  * @param {*} graph 2D graph consisting of node objects
  * @param {*} queue PriorityQueue as an Array
  */
-const setUpDistancesAndQueue = (graph, queue, startNode) => {
+const setUpDistances = (graph, startNode) => {
   let distances = {};
   graph.map((row, rowIndex) => {
     return row.map((node, nodeIndex) => {
       let location = [node.row, node.column];
       if (node === startNode) {
         distances[location] = 0;
-        queue.enqueue(location, 1);
       } else {
         distances[location] = Infinity;
-        queue.enqueue(location, Infinity);
       }
     });
   });

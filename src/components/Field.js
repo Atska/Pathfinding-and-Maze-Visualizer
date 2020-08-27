@@ -6,9 +6,13 @@ import "./Field.css";
 // Algorithms
 import "../algos/dijkstras";
 import { dijkstras } from "../algos/dijkstras";
-// import "../algos/dijkstras";
+import RecursiveBacktracking from "../algos/RecursiveBacktracking";
 
 class Field extends Component {
+  // graph size
+  rowsize = 21;
+  columnSize = 35;
+
   state = {
     graph: [],
     startNodeExits: false,
@@ -19,7 +23,13 @@ class Field extends Component {
   };
 
   componentDidMount() {
-    const newGraph = createGraph();
+    const newGraph = createGraph(
+      this.rowsize,
+      this.columnSize,
+      false,
+      false,
+      false
+    );
     this.setState({ graph: newGraph });
   }
 
@@ -87,26 +97,45 @@ class Field extends Component {
     }
   };
 
-  resetField() {
-    const graph = createGraph();
-    this.setState({
-      graph: graph,
-      startNodeExits: false,
-      endNodeExists: false,
-    });
-  }
+  resetField() {}
 
   visualizeDijkstras() {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
-      return console.log(dijkstras(graph, startNode, endNode));
+      console.log(graph);
+      let { shortestPath, neighborList } = dijkstras(graph, startNode, endNode);
+      animateSearchProcess(neighborList, shortestPath);
+    }
+  }
+
+  visualizeMaze() {
+    const { graph, startNode, endNode } = this.state;
+    if ((graph, startNode, endNode)) {
+      const newGraph = createGraph(
+        this.rowsize,
+        this.columnSize,
+        true,
+        false,
+        false
+      );
+      //newGraph[startNode.row][startNode.column] = startNode;
+      //newGraph[endNode.row][endNode.column] = endNode;
+      this.setState({
+        graph: newGraph,
+        startNode: null,
+        endNode: null,
+        isStart: false,
+        isEnd: false,
+      });
+
+      const maze = new RecursiveBacktracking(graph, startNode, endNode);
+      animateMaze(maze.runMaze());
     }
   }
 
   render() {
     const { graph, startNode, endNode } = this.state;
     // create the board.
-    this.visualizeDijkstras();
     let board = graph.map((row, rowIndex) => {
       return (
         // each row must be in a div so you can form a field in css
@@ -134,34 +163,38 @@ class Field extends Component {
     });
 
     //HTML
-    return <div className="Field">{board}</div>;
+    return (
+      <div>
+        <div className="Field">{board}</div>
+        <button onClick={() => this.visualizeDijkstras()}>Hi</button>
+        <button onClick={() => this.visualizeMaze()}>MAze</button>
+      </div>
+    );
   }
 }
 export default Field;
 
-const createGraph = () => {
+const createGraph = (rowSize, colSize, isWall, isStart, isEnd) => {
   const graph = [];
-  let rowSize = 21;
-  let colSize = 35;
   // create a 2D Array
   for (let row = 0; row < rowSize; row++) {
     const currentRow = [];
     for (let column = 0; column < colSize; column++) {
       // create an object with node coordinates. Starts and end return a true bool when they hit the coordinates
-      currentRow.push(createNode(row, column));
+      currentRow.push(createNode(row, column, isWall, isStart, isEnd));
     }
     graph.push(currentRow);
   }
   return graph;
 };
 
-const createNode = (row, column) => {
+const createNode = (row, column, isWall, isStart, isEnd) => {
   const nodeSchema = {
     row: row,
     column: column,
-    wall: false,
-    start: false,
-    end: false,
+    wall: isWall,
+    start: isStart,
+    end: isEnd,
   };
   return nodeSchema;
 };
@@ -192,4 +225,43 @@ const setWall = (graph, row, column) => {
 const deleteWall = (graph, row, column) => {
   graph[row][column].wall = false;
   return graph;
+};
+
+const animateMaze = (neighborList) => {
+  // i = 1 so we dont animate start node
+  for (let i = 1; i < neighborList.length - 1; i++) {
+    setTimeout(() => {
+      let currRow = neighborList[i][0];
+      let currColumn = neighborList[i][1];
+      document.getElementById([currRow, currColumn]).className = "node";
+    }, 20 * i);
+  }
+};
+
+const animateSearchProcess = (neighborList, shortestPath) => {
+  // i = 1 so we dont animate start node
+  for (let i = 1; i < neighborList.length; i++) {
+    setTimeout(() => {
+      let currRow = neighborList[i][0];
+      let currColumn = neighborList[i][1];
+      document.getElementById([currRow, currColumn]).className = "node-search";
+      if (i === neighborList.length - 1) {
+        return setTimeout(() => {
+          animateShortestPath(shortestPath);
+        }, 150);
+      }
+    }, 10 * i);
+  }
+};
+
+const animateShortestPath = (shortestPath) => {
+  for (let i = 0; i < shortestPath.length - 1; i++) {
+    setTimeout(() => {
+      let currRow = shortestPath[i][0];
+      let currColumn = shortestPath[i][1];
+      document.getElementById([currRow, currColumn]).className =
+        "node-shortest-path";
+    }, 40 * i);
+  }
+  return;
 };

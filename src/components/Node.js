@@ -30,6 +30,7 @@ class Node extends Component {
     //HTML
     return (
       <div
+        id={[row, column]}
         className={className()}
         onMouseEnter={() => onMouseEnter()}
         onMouseUp={() => onMouseUp()}
