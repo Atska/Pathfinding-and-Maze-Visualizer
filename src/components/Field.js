@@ -102,7 +102,6 @@ class Field extends Component {
   visualizeDijkstras() {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
-      console.log(graph);
       let { shortestPath, neighborList } = dijkstras(graph, startNode, endNode);
       animateSearchProcess(neighborList, shortestPath);
     }
@@ -111,27 +110,24 @@ class Field extends Component {
   visualizeMaze() {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
-      const newGraph = createGraph(
-        this.rowsize,
-        this.columnSize,
-        true,
-        false,
-        false
-      );
-      //newGraph[startNode.row][startNode.column] = startNode;
-      //newGraph[endNode.row][endNode.column] = endNode;
-      this.setState({
-        graph: newGraph,
-        startNode: null,
-        endNode: null,
-        isStart: false,
-        isEnd: false,
-      });
-
       const maze = new RecursiveBacktracking(graph, startNode, endNode);
-      animateMaze(maze.runMaze());
+      this.animateMaze(maze.runMaze(), graph, endNode);
     }
   }
+  animateMaze = (wallList, graph, endNode) => {
+    // i = 1 so we dont animate start node
+    for (let i = 1; i < wallList.length - 1; i++) {
+      setTimeout(() => {
+        const currRow = wallList[i][0];
+        const currColumn = wallList[i][1];
+        if (currRow !== endNode.row || currColumn !== endNode.column) {
+          setWall(graph, currRow, currColumn);
+          document.getElementById([currRow, currColumn]).className =
+            "node-wall";
+        }
+      }, 20 * i);
+    }
+  };
 
   render() {
     const { graph, startNode, endNode } = this.state;
@@ -225,17 +221,6 @@ const setWall = (graph, row, column) => {
 const deleteWall = (graph, row, column) => {
   graph[row][column].wall = false;
   return graph;
-};
-
-const animateMaze = (neighborList) => {
-  // i = 1 so we dont animate start node
-  for (let i = 1; i < neighborList.length - 1; i++) {
-    setTimeout(() => {
-      let currRow = neighborList[i][0];
-      let currColumn = neighborList[i][1];
-      document.getElementById([currRow, currColumn]).className = "node";
-    }, 20 * i);
-  }
 };
 
 const animateSearchProcess = (neighborList, shortestPath) => {

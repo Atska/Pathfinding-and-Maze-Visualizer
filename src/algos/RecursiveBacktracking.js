@@ -11,10 +11,8 @@ class RecursiveBacktracking {
     const stack = [start];
     const visited = {};
     const mazeList = [];
-    console.log(start);
-    console.log(end);
     this.dfs(stack, visited, mazeList);
-    return mazeList.filter((loc) => loc !== start).filter((loc) => loc !== end);
+    return mazeList;
   }
 
   dfs(stack, visited, mazeList) {
@@ -119,3 +117,4 @@ const test = createGraph();
 let start = { row: 1, column: 1 };
 let end = { row: 10, column: 10 };
 const rec = new RecursiveBacktracking(test, start, end);
+console.log(rec.runMaze());
