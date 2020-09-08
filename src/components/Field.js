@@ -7,6 +7,7 @@ import "./Field.css";
 import "../algos/dijkstras";
 import { dijkstras } from "../algos/dijkstras";
 import RecursiveBacktracking from "../algos/RecursiveBacktracking";
+import RecursiveDivision from "../algos/RecursiveDivision";
 
 class Field extends Component {
   // graph size
@@ -111,26 +112,20 @@ class Field extends Component {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
       const maze = new RecursiveBacktracking(graph, startNode, endNode);
-      this.animateMaze(maze.runMaze(), graph, endNode);
+      animateMaze(maze.runMaze(), graph, endNode);
     }
   }
-  animateMaze = (wallList, graph, endNode) => {
-    // i = 1 so we dont animate start node
-    for (let i = 1; i < wallList.length - 1; i++) {
-      setTimeout(() => {
-        const currRow = wallList[i][0];
-        const currColumn = wallList[i][1];
-        if (currRow !== endNode.row || currColumn !== endNode.column) {
-          setWall(graph, currRow, currColumn);
-          document.getElementById([currRow, currColumn]).className =
-            "node-wall";
-        }
-      }, 20 * i);
+
+  visualizeDivMaze() {
+    const { graph, startNode, endNode } = this.state;
+    if ((graph, startNode, endNode)) {
+      const maze = new RecursiveDivision(graph, startNode, endNode);
+      animateDivMaze(maze.runMaze(), graph);
     }
-  };
+  }
 
   render() {
-    const { graph, startNode, endNode } = this.state;
+    const { graph } = this.state;
     // create the board.
     let board = graph.map((row, rowIndex) => {
       return (
@@ -164,6 +159,7 @@ class Field extends Component {
         <div className="Field">{board}</div>
         <button onClick={() => this.visualizeDijkstras()}>Hi</button>
         <button onClick={() => this.visualizeMaze()}>MAze</button>
+        <button onClick={() => this.visualizeDivMaze()}>Div</button>
       </div>
     );
   }
@@ -235,7 +231,7 @@ const animateSearchProcess = (neighborList, shortestPath) => {
           animateShortestPath(shortestPath);
         }, 150);
       }
-    }, 10 * i);
+    }, 20 * i);
   }
 };
 
@@ -246,7 +242,33 @@ const animateShortestPath = (shortestPath) => {
       let currColumn = shortestPath[i][1];
       document.getElementById([currRow, currColumn]).className =
         "node-shortest-path";
-    }, 40 * i);
+    }, 60 * i);
   }
   return;
+};
+
+const animateMaze = (wallList, graph, endNode, startNode) => {
+  // i = 1 so we dont animate start node
+  for (let i = 0; i < wallList.length; i++) {
+    setTimeout(() => {
+      const currRow = wallList[i][0];
+      const currColumn = wallList[i][1];
+      if (currRow !== endNode.row || currColumn !== endNode.column) {
+        setWall(graph, currRow, currColumn);
+        document.getElementById([currRow, currColumn]).className = "node-wall";
+      }
+    }, 30 * i);
+  }
+};
+
+const animateDivMaze = (wallList, graph) => {
+  // i = 1 so we dont animate start node
+  for (let i = 0; i < wallList.length; i++) {
+    setTimeout(() => {
+      const currRow = wallList[i][0];
+      const currColumn = wallList[i][1];
+      setWall(graph, currRow, currColumn);
+      document.getElementById([currRow, currColumn]).className = "node-wall";
+    }, 30 * i);
+  }
 };
