@@ -24,7 +24,7 @@ export class RecursiveDivision {
   }
   // executes the maze
   runMaze() {
-    const wallList = [];
+    let wallList = [];
     const startX = 0;
     const startY = 0;
     const endX = this.graph[0].length - 1;
@@ -41,7 +41,7 @@ export class RecursiveDivision {
       wallList
     );
     // filter the newly filled wallList. This is optional for the frontend, so you dont wall a start or end node
-    this.filterWallList(wallList, start, end);
+    wallList = this.filterStartAndEndNode(wallList, start, end);
     return wallList;
   }
 
@@ -166,6 +166,41 @@ export class RecursiveDivision {
         wallList.push([wallY, wallX]);
       }
     }
+  }
+  /**
+   * Simple function to filter the start and end nodes out of the wall
+   * This is only for frontend purposes, so you dont overwrite start and end nodes will walls
+   * @param {Array} wallList array of all wall nodes
+   * @param {Array} start [row, column] coordinates of the start node
+   * @param {Array} end [row, column] coordinates of the end node
+   * @returns {Array} filtered array
+   */
+  filterStartAndEndNode(wallList, start, end) {
+    if (!wallList || !start || !end) return false;
+    console.log(wallList);
+    let newArr = [];
+    for (let index = 0; index < wallList.length; index++) {
+      const element = wallList[index];
+      if (
+        !this.equalityChecker(start, element) &&
+        !this.equalityChecker(end, element)
+      ) {
+        newArr.push(element);
+      }
+    }
+    console.log(newArr);
+    wallList = newArr;
+    return wallList;
+  }
+  /**
+   * Compares two array
+   * @param {Array} arr1 Array with two values -> [3, 3]
+   * @param {Array} arr2 Array with two values -> [3, 3]
+   * @returns Boolean; If array values are same -> true else -> false
+   */
+  equalityChecker(arr1, arr2) {
+    if (arr1[0] === arr2[0] && arr1[1] === arr2[1]) return true;
+    return false;
   }
 }
 

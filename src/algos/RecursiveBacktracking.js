@@ -1,3 +1,14 @@
+/**
+ * @param {Array} graph 2D-Array/Matrix consisting of specific node objects
+ * @param {Object} startNode object with row, column, wall, start, end as keys
+ * @param {Object} endNode object with row, column, wall, start, end as keys
+ * @returns {Array} Array of wall coordinates in arrays without start and end location
+ *
+ * This algortihm uses a depth-first-search algorithm to traverse the graph
+ * A stack is used to keep track of the visited node and ensures the ability to backtrack if you hit a dead end
+ * The frontend graph looks like a chessboard so you have to traverse 2 nodes at the same time
+ * to generate walls and passable nodes
+ */
 class RecursiveBacktracking {
   constructor(graph, startNode, endNode) {
     this.graph = graph;
@@ -64,7 +75,7 @@ class RecursiveBacktracking {
   /**
    * Gets all unvisited neighbors of current node
    * @param {Array} currentNode current location of the node
-   * @param {Obj} visited Obj which checks if nodes are true (has been visited)
+   * @param {Object} visited Obj which checks if nodes are true (has been visited)
    * @returns {Array} filtered array of all unvisited nodes
    */
   getUnvisitedNeighbors(currentNode, visited) {

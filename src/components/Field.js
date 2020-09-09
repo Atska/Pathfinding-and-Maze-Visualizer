@@ -4,8 +4,7 @@ import Node from "./Node";
 // CSS
 import "./Field.css";
 // Algorithms
-import "../algos/dijkstras";
-import { dijkstras } from "../algos/dijkstras";
+import Dijkstras from "../algos/DijkstrasAlgorithm";
 import RecursiveBacktracking from "../algos/RecursiveBacktracking";
 import RecursiveDivision from "../algos/RecursiveDivision";
 
@@ -103,8 +102,9 @@ class Field extends Component {
   visualizeDijkstras() {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
-      let { shortestPath, neighborList } = dijkstras(graph, startNode, endNode);
-      animateSearchProcess(neighborList, shortestPath);
+      const dijkstras = new Dijkstras(graph, startNode, endNode);
+      const { shortestPath, visitedNodes } = dijkstras.shortestPath();
+      animateSearchProcess(visitedNodes, shortestPath);
     }
   }
 
