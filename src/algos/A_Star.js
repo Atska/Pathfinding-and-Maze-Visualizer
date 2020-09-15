@@ -1,14 +1,15 @@
+import { PriorityQueue } from "../utils/PriorityQueue.js";
+import { createGraph } from "../utils/helperFunctions.js";
+
 /**
  * @param {Array} graph 2D-Array/Matrix consisting of specific node objects
  * @param {Object} startNode object with row, column, wall, start, end as keys
  * @param {Object} endNode object with row, column, wall, start, end as keys
  * @returns {Array} Array of wall coordinates in arrays without start and end location
  *
- * classic dijkstras is an algorithm for finding the shortest path between 2 nodes
- * Usually you need a PriorityQueue/Heap data structure but the distant between nodes
- * is constant 1 so you can use a queue
+ *
  */
-class Dijkstras {
+class AStar {
   constructor(graph, startNode, endNode) {
     this.graph = graph;
     this.startNode = startNode;
@@ -19,16 +20,18 @@ class Dijkstras {
     if (!this.graph || !this.startNode || !this.endNode) return false;
     const start = [this.startNode.row, this.startNode.column];
     const end = [this.endNode.row, this.endNode.column];
-    let prevNode = {};
-    let queue = [start];
+    let prevNode = { start: null };
     const result = [];
     const visitedNodes = [];
+    let queue = new PriorityQueue();
+    queue.enqueue(start, 0);
     // setUp distances grid in a hashmap -> distanceMap[[0, 0]]
-    const distanceMap = this.setUpDistances(this.graph, this.startNode);
-
+    const costMap = this.setUpAStarCostMap(this.graph, this.startNode);
+    costMap[start] = { G: 0, H: 0, F: 0 };
     // while nodes to visit still exists
-    while (queue.length) {
-      let curr_node = queue.shift();
+    while (queue.values.length) {
+      //Get the enqueued array
+      let curr_node = queue.dequeue().val;
       // if wall skip it and continue
       if (this.graph[curr_node[0]][curr_node[1]].wall === true) continue;
       // EndCondition: Check if current node is the end node -> finish
@@ -43,17 +46,29 @@ class Dijkstras {
         break;
       }
 
-      if (curr_node || distanceMap[curr_node] !== Infinity) {
-        if (curr_node !== start) visitedNodes.push(curr_node);
+      if (curr_node) {
         // gets an array of neighbors
         let neighborList = this.getNeighbors(curr_node, this.graph);
         for (let i = 0; i < neighborList.length; i++) {
-          // adds the distance of the current node with its neighbors which is always 1
-          let sum_distance = distanceMap[curr_node] + 1;
-          if (sum_distance < distanceMap[neighborList[i]]) {
+          // G: Similar to dijkstras its the distance between the current node and the start
+          const G = costMap[curr_node]["G"] + 1;
+          // H: The Heuristik
+          const H =
+            (neighborList[i][0] - end[0]) ** 2 +
+            (neighborList[i][1] - end[1]) ** 2;
+          // F: New Score to determine shortest path
+          const F = G + H;
+          // important for shortest path. Avoids checking nodes twice and updates shortest path
+          if (G < costMap[neighborList[i]]["G"]) {
+            // Avoids overlapping visited nodes with walled nodes and filters end node for front end purposes
+            if (
+              !this.graph[neighborList[i][0]][neighborList[i][1]].wall &&
+              !this.equalityChecker(neighborList[i], end)
+            )
+              visitedNodes.push(neighborList[i]);
+            costMap[neighborList[i]] = { G: G, H: H, F: F };
             prevNode[neighborList[i]] = curr_node;
-            distanceMap[neighborList[i]] = sum_distance;
-            queue.push(neighborList[i]);
+            queue.enqueue(neighborList[i], F);
           }
         }
       }
@@ -86,24 +101,23 @@ class Dijkstras {
   }
 
   /**
-   * Based on graph, put every node into an javascript object as a key and set their value
-   * to Infinity and the start to 0
+   *
    * @param {Array} graph 2D graph consisting of node objects
    * @param {Array} queue Queue as an Array
    */
-  setUpDistances(graph, startNode) {
-    let distances = {};
+  setUpAStarCostMap(graph, startNode) {
+    let cost = {};
     graph.map((row, rowIndex) => {
       return row.map((node, nodeIndex) => {
         let location = [node.row, node.column];
         if (node === startNode) {
-          distances[location] = 0;
+          cost[location] = { G: 0, H: 0, F: 0 };
         } else {
-          distances[location] = Infinity;
+          cost[location] = { G: Infinity, H: Infinity, F: Infinity };
         }
       });
     });
-    return distances;
+    return cost;
   }
 
   /**
@@ -118,4 +132,12 @@ class Dijkstras {
   }
 }
 
-export default Dijkstras;
+export default AStar;
+
+let g = createGraph();
+let startNode = { row: 1, column: 1, wall: false, start: false, end: false };
+let endNode = { row: 8, column: 14, wall: false, start: false, end: false };
+g[3][3].wall = true;
+const astar = new AStar(g, startNode, endNode);
+
+console.log(astar.shortestPath());

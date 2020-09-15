@@ -4,9 +4,10 @@ import Node from "./Node";
 // CSS
 import "./Field.css";
 // Algorithms
-import Dijkstras from "../algos/DijkstrasAlgorithm";
-import RecursiveBacktracking from "../algos/RecursiveBacktracking";
-import RecursiveDivision from "../algos/RecursiveDivision";
+import AStar from "../algos/A_Star.js";
+import Dijkstras from "../algos/DijkstrasAlgorithm.js";
+import RecursiveBacktracking from "../algos/RecursiveBacktracking.js";
+import RecursiveDivision from "../algos/RecursiveDivision.js";
 
 class Field extends Component {
   // graph size
@@ -108,6 +109,16 @@ class Field extends Component {
     }
   }
 
+  visualizeAStar() {
+    const { graph, startNode, endNode } = this.state;
+    if ((graph, startNode, endNode)) {
+      const A_Star = new AStar(graph, startNode, endNode);
+      const { shortestPath, visitedNodes } = A_Star.shortestPath();
+      console.log(A_Star);
+      animateSearchProcess(visitedNodes, shortestPath);
+    }
+  }
+
   visualizeMaze() {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
@@ -157,6 +168,7 @@ class Field extends Component {
     return (
       <div>
         <div className="Field">{board}</div>
+        <button onClick={() => this.visualizeAStar()}>AStar</button>
         <button onClick={() => this.visualizeDijkstras()}>Hi</button>
         <button onClick={() => this.visualizeMaze()}>MAze</button>
         <button onClick={() => this.visualizeDivMaze()}>Div</button>
@@ -221,7 +233,7 @@ const deleteWall = (graph, row, column) => {
 
 const animateSearchProcess = (neighborList, shortestPath) => {
   // i = 1 so we dont animate start node
-  for (let i = 1; i < neighborList.length; i++) {
+  for (let i = 0; i < neighborList.length; i++) {
     setTimeout(() => {
       let currRow = neighborList[i][0];
       let currColumn = neighborList[i][1];
