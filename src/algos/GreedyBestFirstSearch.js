@@ -10,14 +10,14 @@ import {
  * It uses a score to determine the direction to travel
  * The formula is F = G + H.
  * G is the distance from the node to the start node.
- * H is based on the Manhatten distance
+ * H is based on the Pythagorean theorem.
  * F is the sum of G and H.
  * @param {Array} graph 2D-Array/Matrix consisting of specific node objects
  * @param {Object} startNode object with row, column, wall, start, end as keys
  * @param {Object} endNode object with row, column, wall, start, end as keys
  * @returns {Array} Array of wall coordinates in arrays without start and end location
  */
-class AStar {
+class GreedyBestFirstSearch {
   constructor(graph, startNode, endNode) {
     this.graph = graph;
     this.startNode = startNode;
@@ -60,10 +60,11 @@ class AStar {
         for (let i = 0; i < neighborList.length; i++) {
           // G: Similar to dijkstras its the distance between the current node and the start
           const G = costMap[curr_node]["G"] + 1;
-          // H: The Heuristik. Manhatten distance
+          // H: The Heuristik. Pythagorean theorem
           const H =
-            Math.abs(end[0] - neighborList[i][0]) +
-            Math.abs(end[1] - neighborList[i][1]);
+            (neighborList[i][0] - end[0]) ** 2 +
+            (neighborList[i][1] - end[1]) ** 2;
+
           // F: New Score to determine shortest path
           const F = G + H;
           // important for shortest path. Avoids checking nodes twice and updates shortest path
@@ -85,4 +86,4 @@ class AStar {
   }
 }
 
-export default AStar;
+export default GreedyBestFirstSearch;

@@ -1,13 +1,12 @@
 /**
+ * This algortihm uses a depth-first-search algorithm to traverse the graph.
+ * A stack is used to keep track of the visited node and ensures the ability to backtrack if you hit a dead end.
+ * The frontend graph looks like a chessboard so you have to traverse 2 nodes at the same time
+ * to generate walls and passable nodes.
  * @param {Array} graph 2D-Array/Matrix consisting of specific node objects
  * @param {Object} startNode object with row, column, wall, start, end as keys
  * @param {Object} endNode object with row, column, wall, start, end as keys
  * @returns {Array} Array of wall coordinates in arrays without start and end location
- *
- * This algortihm uses a depth-first-search algorithm to traverse the graph
- * A stack is used to keep track of the visited node and ensures the ability to backtrack if you hit a dead end
- * The frontend graph looks like a chessboard so you have to traverse 2 nodes at the same time
- * to generate walls and passable nodes
  */
 class RecursiveBacktracking {
   constructor(graph, startNode, endNode) {
@@ -23,6 +22,7 @@ class RecursiveBacktracking {
     const visited = {};
     const mazeList = [];
     this.dfs(stack, visited, mazeList);
+    // removes first and last for frontend purposes
     mazeList.shift();
     mazeList.pop();
     return mazeList;

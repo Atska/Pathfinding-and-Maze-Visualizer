@@ -1,19 +1,20 @@
+import { equalityChecker } from "../utils/helperFunctions.js";
 /**
+ * The recursive divison is an algorithm which splits a grid either horizontal or vertical.
+ * You have to determine a random coordinate and draw the wall.
+ * The wall has to have a randomly generated gap.
+ * By dividing the grid you create subgrids which have to be divided and walled again
+ * Therefore you need to call 4 recursions: If split vertically left and right, otherwise if split horizontal top and bottom.
+ * The recursive function stops when the difference between end and start coordinates is 1.
+ *
+ * It is important to notice that the walls must have 1 passable node in between each other.
+ * At the coordinate of the gap cannot be a wall.
+ * The most sensitive part of this algorithm is in generating random values for gap and walls.
+ *
  * @param {Array} graph 2D-Array/Matrix consisting of specific node objects
  * @param {Object} startNode object with row, column, wall, start, end as keys
  * @param {Object} endNode object with row, column, wall, start, end as keys
  * @returns {Array} Array of wall coordinates in arrays without start and end location
- *
- * The recursive divison is an algorithm which splits a grid either horizontal or vertical
- * You have to determine a random coordinate and draw the wall
- * The wall has to have a randomly generated gap
- * By dividing the grid you create subgrids which have to be divided and walled again
- * Therefore you need to call 4 recursions: If split vertically left and right, otherwise if split horizontal top and bottom
- * The recursive function stops when the difference between end and start coordinates is 1
- *
- * It is important to notice that the walls must have 1 passable node in between each other
- * At the coordinate of the gap cannot be a wall
- * The most sensitive part of this algorithm is in generating random values for gap and walls
  */
 
 export class RecursiveDivision {
@@ -181,26 +182,13 @@ export class RecursiveDivision {
     let newArr = [];
     for (let index = 0; index < wallList.length; index++) {
       const element = wallList[index];
-      if (
-        !this.equalityChecker(start, element) &&
-        !this.equalityChecker(end, element)
-      ) {
+      if (!equalityChecker(start, element) && !equalityChecker(end, element)) {
         newArr.push(element);
       }
     }
     console.log(newArr);
     wallList = newArr;
     return wallList;
-  }
-  /**
-   * Compares two array
-   * @param {Array} arr1 Array with two values -> [3, 3]
-   * @param {Array} arr2 Array with two values -> [3, 3]
-   * @returns Boolean; If array values are same -> true else -> false
-   */
-  equalityChecker(arr1, arr2) {
-    if (arr1[0] === arr2[0] && arr1[1] === arr2[1]) return true;
-    return false;
   }
 }
 

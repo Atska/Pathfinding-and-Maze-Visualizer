@@ -5,6 +5,7 @@ import Node from "./Node";
 import "./Field.css";
 // Algorithms
 import AStar from "../algos/A_Star.js";
+import GreedyBFS from "../algos/GreedyBestFirstSearch";
 import Dijkstras from "../algos/DijkstrasAlgorithm.js";
 import RecursiveBacktracking from "../algos/RecursiveBacktracking.js";
 import RecursiveDivision from "../algos/RecursiveDivision.js";
@@ -114,7 +115,15 @@ class Field extends Component {
     if ((graph, startNode, endNode)) {
       const A_Star = new AStar(graph, startNode, endNode);
       const { shortestPath, visitedNodes } = A_Star.shortestPath();
-      console.log(A_Star);
+      animateSearchProcess(visitedNodes, shortestPath);
+    }
+  }
+
+  visualizeGreedyBFS() {
+    const { graph, startNode, endNode } = this.state;
+    if ((graph, startNode, endNode)) {
+      const GBFS = new GreedyBFS(graph, startNode, endNode);
+      const { shortestPath, visitedNodes } = GBFS.shortestPath();
       animateSearchProcess(visitedNodes, shortestPath);
     }
   }
@@ -172,6 +181,7 @@ class Field extends Component {
         <button onClick={() => this.visualizeDijkstras()}>Hi</button>
         <button onClick={() => this.visualizeMaze()}>MAze</button>
         <button onClick={() => this.visualizeDivMaze()}>Div</button>
+        <button onClick={() => this.visualizeGreedyBFS()}>Greedy</button>
       </div>
     );
   }
