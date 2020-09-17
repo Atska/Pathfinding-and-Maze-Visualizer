@@ -61,9 +61,7 @@ class AStar {
           // G: Similar to dijkstras its the distance between the current node and the start
           const G = costMap[curr_node]["G"] + 1;
           // H: The Heuristik. Manhatten distance
-          const H =
-            Math.abs(end[0] - neighborList[i][0]) +
-            Math.abs(end[1] - neighborList[i][1]);
+          const H = this.ManhattenDistance(neighborList[i], end);
           // F: New Score to determine shortest path
           const F = G + H;
           // important for shortest path. Avoids checking nodes twice and updates shortest path
@@ -82,6 +80,10 @@ class AStar {
       }
     }
     return { shortestPath: result, visitedNodes: visitedNodes };
+  }
+
+  ManhattenDistance(node, end) {
+    return Math.abs(end[0] - node[0]) + Math.abs(end[1] - node[1]);
   }
 }
 

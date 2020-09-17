@@ -4,11 +4,13 @@ import Node from "./Node";
 // CSS
 import "./Field.css";
 // Algorithms
-import AStar from "../algos/A_Star.js";
-import GreedyBFS from "../algos/GreedyBestFirstSearch";
-import Dijkstras from "../algos/DijkstrasAlgorithm.js";
-import RecursiveBacktracking from "../algos/RecursiveBacktracking.js";
-import RecursiveDivision from "../algos/RecursiveDivision.js";
+import AStar from "../algorithms/A_Star.js";
+import DepthFirstSearch from "../algorithms/DepthFirstSearch.js";
+import GreedyBFS from "../algorithms/GreedyBestFirstSearch";
+import Dijkstras from "../algorithms/DijkstrasAlgorithm.js";
+import RecursiveBacktracking from "../algorithms/RecursiveBacktracking.js";
+import RecursiveDivision from "../algorithms/RecursiveDivision.js";
+import BreadthFirstSearch from "../algorithms/BreadthFirstSearch.js";
 
 class Field extends Component {
   // graph size
@@ -119,6 +121,24 @@ class Field extends Component {
     }
   }
 
+  visualizeDFS() {
+    const { graph, startNode, endNode } = this.state;
+    if ((graph, startNode, endNode)) {
+      const DFS = new DepthFirstSearch(graph, startNode, endNode);
+      const { path, visitedNodes } = DFS.search();
+      animateSearchProcess(visitedNodes, path);
+    }
+  }
+
+  visualizeBFS() {
+    const { graph, startNode, endNode } = this.state;
+    if ((graph, startNode, endNode)) {
+      const BFS = new BreadthFirstSearch(graph, startNode, endNode);
+      const { path, visitedNodes } = BFS.search();
+      animateSearchProcess(visitedNodes, path);
+    }
+  }
+
   visualizeGreedyBFS() {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
@@ -182,6 +202,8 @@ class Field extends Component {
         <button onClick={() => this.visualizeMaze()}>MAze</button>
         <button onClick={() => this.visualizeDivMaze()}>Div</button>
         <button onClick={() => this.visualizeGreedyBFS()}>Greedy</button>
+        <button onClick={() => this.visualizeDFS()}>DFS</button>
+        <button onClick={() => this.visualizeBFS()}>BFS</button>
       </div>
     );
   }

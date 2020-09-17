@@ -134,6 +134,7 @@ export class RecursiveDivision {
     } else if (height < width) {
       return false;
     } else {
+      // makes the maze more dynamic
       return Math.random() < 0.5 ? true : false;
     }
   }

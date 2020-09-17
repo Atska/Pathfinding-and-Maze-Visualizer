@@ -6,7 +6,7 @@ import {
 } from "../utils/helperFunctions.js";
 
 /**
- * The A-Star algorithm is an extension of dijkstras and return the shortest path between 2 nodes
+ * The Greedy Best-First-Search determines the shortest path between 2 nodes
  * It uses a score to determine the direction to travel
  * The formula is F = G + H.
  * G is the distance from the node to the start node.

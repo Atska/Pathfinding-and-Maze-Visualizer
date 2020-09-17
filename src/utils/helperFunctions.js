@@ -27,7 +27,7 @@ export const getNeighbors = (curr_node, graph) => {
  * Start cost is 0 and every unvisited node positive Infinity
  * @param {Array} graph 2D graph consisting of node objects
  * @param {Array} queue Queue as an Array
- * @returns {Object}
+ * @returns {Object} Whole grid in an javascript object. Keys are arrays [row, column] and values are objects
  */
 export const setUpCostMap = (graph, startNode) => {
   let cost = {};
