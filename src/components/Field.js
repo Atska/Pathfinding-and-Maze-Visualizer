@@ -101,7 +101,40 @@ class Field extends Component {
     }
   };
 
-  resetField() {}
+  resetField() {
+    const newGraph = createGraph(
+      this.rowsize,
+      this.columnSize,
+      false,
+      false,
+      false,
+      "resetAll"
+    );
+
+    this.setState({
+      graph: newGraph,
+      endNodeExists: false,
+      startNodeExits: false,
+      startnode: null,
+      endNode: null,
+    });
+  }
+
+  clearSearch() {
+    const { graph } = this.state;
+    graph.forEach((row, rowIndex) => {
+      return row.forEach((node, nodeIndex) => {
+        if (
+          document.getElementById([rowIndex, nodeIndex]).className ===
+            "node-shortest-path" ||
+          document.getElementById([rowIndex, nodeIndex]).className ===
+            "node-search"
+        )
+          return (document.getElementById([rowIndex, nodeIndex]).className =
+            "node");
+      });
+    });
+  }
 
   visualizeDijkstras() {
     const { graph, startNode, endNode } = this.state;
@@ -198,33 +231,37 @@ class Field extends Component {
       <div>
         <div className="Field">{board}</div>
         <button onClick={() => this.visualizeAStar()}>AStar</button>
-        <button onClick={() => this.visualizeDijkstras()}>Hi</button>
-        <button onClick={() => this.visualizeMaze()}>MAze</button>
-        <button onClick={() => this.visualizeDivMaze()}>Div</button>
+        <button onClick={() => this.visualizeDijkstras()}>Dijkstras</button>
+        <button onClick={() => this.visualizeMaze()}>RecBacktracking</button>
+        <button onClick={() => this.visualizeDivMaze()}>RecursiveDiv</button>
         <button onClick={() => this.visualizeGreedyBFS()}>Greedy</button>
         <button onClick={() => this.visualizeDFS()}>DFS</button>
         <button onClick={() => this.visualizeBFS()}>BFS</button>
+        <button onClick={() => this.resetField()}>Reset</button>
+        <button onClick={() => this.clearSearch()}>Clear Search</button>
       </div>
     );
   }
 }
 export default Field;
 
-const createGraph = (rowSize, colSize, isWall, isStart, isEnd) => {
+const createGraph = (rowSize, colSize, isWall, isStart, isEnd, basecase) => {
   const graph = [];
   // create a 2D Array
   for (let row = 0; row < rowSize; row++) {
     const currentRow = [];
     for (let column = 0; column < colSize; column++) {
       // create an object with node coordinates. Starts and end return a true bool when they hit the coordinates
-      currentRow.push(createNode(row, column, isWall, isStart, isEnd));
+      currentRow.push(
+        createNode(row, column, isWall, isStart, isEnd, basecase)
+      );
     }
     graph.push(currentRow);
   }
   return graph;
 };
 
-const createNode = (row, column, isWall, isStart, isEnd) => {
+const createNode = (row, column, isWall, isStart, isEnd, basecase) => {
   const nodeSchema = {
     row: row,
     column: column,
@@ -232,6 +269,9 @@ const createNode = (row, column, isWall, isStart, isEnd) => {
     start: isStart,
     end: isEnd,
   };
+  if (basecase === "resetAll")
+    document.getElementById([row, column]).className = "node";
+
   return nodeSchema;
 };
 
@@ -264,7 +304,6 @@ const deleteWall = (graph, row, column) => {
 };
 
 const animateSearchProcess = (neighborList, shortestPath) => {
-  // i = 1 so we dont animate start node
   for (let i = 0; i < neighborList.length; i++) {
     setTimeout(() => {
       let currRow = neighborList[i][0];
