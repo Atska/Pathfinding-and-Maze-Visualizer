@@ -1,3 +1,5 @@
+import { shuffleArray } from "../utils/helperFunctions.js";
+
 /**
  * This algortihm uses a depth-first-search algorithm to traverse the graph.
  * A stack is used to keep track of the visited node and ensures the ability to backtrack if you hit a dead end.
@@ -49,7 +51,7 @@ class RecursiveBacktracking {
     // has valid neighbors -> put back to stack to backtrack
     stack.push(currentNode);
     // get a random unvisited neighbor
-    const neighbor = this.shuffleArray(unvisitedNeigh).pop();
+    const neighbor = shuffleArray(unvisitedNeigh).pop();
     // Remember: We traverse 2 node at the same time -> get in between node
     const inBetweenNode = this.getInBetweenNodes(currentNode, neighbor);
     visited[inBetweenNode] = true;
@@ -104,18 +106,6 @@ class RecursiveBacktracking {
       return visited[i] === undefined;
     });
   }
-
-  /**
-   * Shuffles an array and returns shuffled array
-   * @param {Array} a
-   */
-  shuffleArray = (a) => {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  };
 }
 
 export default RecursiveBacktracking;

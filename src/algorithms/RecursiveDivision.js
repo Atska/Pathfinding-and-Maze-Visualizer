@@ -1,4 +1,4 @@
-import { equalityChecker } from "../utils/helperFunctions.js";
+import { filterStartAndEndNode } from "../utils/helperFunctions.js";
 /**
  * The recursive divison is an algorithm which splits a grid either horizontal or vertical.
  * You have to determine a random coordinate and draw the wall.
@@ -42,7 +42,7 @@ export class RecursiveDivision {
       wallList
     );
     // filter the newly filled wallList. This is optional for the frontend, so you dont wall a start or end node
-    wallList = this.filterStartAndEndNode(wallList, start, end);
+    wallList = filterStartAndEndNode(wallList, start, end);
     return wallList;
   }
 
@@ -168,28 +168,6 @@ export class RecursiveDivision {
         wallList.push([wallY, wallX]);
       }
     }
-  }
-  /**
-   * Simple function to filter the start and end nodes out of the wall
-   * This is only for frontend purposes, so you dont overwrite start and end nodes will walls
-   * @param {Array} wallList array of all wall nodes
-   * @param {Array} start [row, column] coordinates of the start node
-   * @param {Array} end [row, column] coordinates of the end node
-   * @returns {Array} filtered array
-   */
-  filterStartAndEndNode(wallList, start, end) {
-    if (!wallList || !start || !end) return false;
-    console.log(wallList);
-    let newArr = [];
-    for (let index = 0; index < wallList.length; index++) {
-      const element = wallList[index];
-      if (!equalityChecker(start, element) && !equalityChecker(end, element)) {
-        newArr.push(element);
-      }
-    }
-    console.log(newArr);
-    wallList = newArr;
-    return wallList;
   }
 }
 
