@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 // Components
-import Node from "./Node";
+import Node from "./Node.js";
+import ControlPanel from "./ControlPanel.js";
+
 // CSS
 import "./Field.css";
 // Algorithms
@@ -11,11 +13,12 @@ import Dijkstras from "../algorithms/DijkstrasAlgorithm.js";
 import RecursiveBacktracking from "../algorithms/RecursiveBacktracking.js";
 import RecursiveDivision from "../algorithms/RecursiveDivision.js";
 import BreadthFirstSearch from "../algorithms/BreadthFirstSearch.js";
+import BinaryTreeMaze from "../algorithms/BinaryTreeMaze.js";
 
 class Field extends Component {
   // graph size
   rowsize = 21;
-  columnSize = 35;
+  columnSize = 43;
 
   state = {
     graph: [],
@@ -102,21 +105,21 @@ class Field extends Component {
   };
 
   resetField() {
-    const newGraph = createGraph(
-      this.rowsize,
-      this.columnSize,
-      false,
-      false,
-      false,
-      "resetAll"
-    );
-
-    this.setState({
-      graph: newGraph,
-      endNodeExists: false,
-      startNodeExits: false,
-      startnode: null,
-      endNode: null,
+    const { graph } = this.state;
+    graph.forEach((row, rowIndex) => {
+      return row.forEach((node, nodeIndex) => {
+        if (
+          document.getElementById([rowIndex, nodeIndex]).className ===
+            "node-shortest-path" ||
+          document.getElementById([rowIndex, nodeIndex]).className ===
+            "node-search" ||
+          document.getElementById([rowIndex, nodeIndex]).className ===
+            "node-wall"
+        ) {
+          deleteWall(graph, rowIndex, nodeIndex);
+          document.getElementById([rowIndex, nodeIndex]).className = "node";
+        }
+      });
     });
   }
 
@@ -152,6 +155,7 @@ class Field extends Component {
       const { shortestPath, visitedNodes } = A_Star.shortestPath();
       animateSearchProcess(visitedNodes, shortestPath);
     }
+    return;
   }
 
   visualizeDFS() {
@@ -185,6 +189,15 @@ class Field extends Component {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
       const maze = new RecursiveBacktracking(graph, startNode, endNode);
+      createWalledGraph(graph, startNode, endNode);
+      animateMaze(maze.runMaze(), graph, endNode);
+    }
+  }
+  visualizeTree() {
+    const { graph, startNode, endNode } = this.state;
+    if ((graph, startNode, endNode)) {
+      const maze = new BinaryTreeMaze(graph, startNode, endNode);
+      createWalledGraph(graph, startNode, endNode);
       animateMaze(maze.runMaze(), graph, endNode);
     }
   }
@@ -192,6 +205,8 @@ class Field extends Component {
   visualizeDivMaze() {
     const { graph, startNode, endNode } = this.state;
     if ((graph, startNode, endNode)) {
+      // reset field so we get a clear field
+      this.resetField();
       const maze = new RecursiveDivision(graph, startNode, endNode);
       animateDivMaze(maze.runMaze(), graph);
     }
@@ -228,21 +243,25 @@ class Field extends Component {
 
     //HTML
     return (
-      <div>
+      <div className="Visualizer">
         <div className="Field">{board}</div>
-        <button onClick={() => this.visualizeAStar()}>AStar</button>
-        <button onClick={() => this.visualizeDijkstras()}>Dijkstras</button>
-        <button onClick={() => this.visualizeMaze()}>RecBacktracking</button>
-        <button onClick={() => this.visualizeDivMaze()}>RecursiveDiv</button>
-        <button onClick={() => this.visualizeGreedyBFS()}>Greedy</button>
-        <button onClick={() => this.visualizeDFS()}>DFS</button>
-        <button onClick={() => this.visualizeBFS()}>BFS</button>
-        <button onClick={() => this.resetField()}>Reset</button>
-        <button onClick={() => this.clearSearch()}>Clear Search</button>
+        <ControlPanel
+          visualizeAStar={() => this.visualizeAStar()}
+          visualizeMaze={() => this.visualizeMaze()}
+          visualizeDijkstras={() => this.visualizeDijkstras()}
+          visualizeDivMaze={() => this.visualizeDivMaze()}
+          visualizeGreedyBFS={() => this.visualizeGreedyBFS()}
+          visualizeTree={() => this.visualizeTree()}
+          visualizeDFS={() => this.visualizeDFS()}
+          visualizeBFS={() => this.visualizeBFS()}
+          resetField={() => this.resetField()}
+          clearSearch={() => this.clearSearch()}
+        />
       </div>
     );
   }
 }
+
 export default Field;
 
 const createGraph = (rowSize, colSize, isWall, isStart, isEnd, basecase) => {
@@ -337,10 +356,10 @@ const animateMaze = (wallList, graph, endNode, startNode) => {
       const currRow = wallList[i][0];
       const currColumn = wallList[i][1];
       if (currRow !== endNode.row || currColumn !== endNode.column) {
-        setWall(graph, currRow, currColumn);
-        document.getElementById([currRow, currColumn]).className = "node-wall";
+        deleteWall(graph, currRow, currColumn);
+        document.getElementById([currRow, currColumn]).className = "node";
       }
-    }, 30 * i);
+    }, 40 * i);
   }
 };
 
@@ -352,6 +371,21 @@ const animateDivMaze = (wallList, graph) => {
       const currColumn = wallList[i][1];
       setWall(graph, currRow, currColumn);
       document.getElementById([currRow, currColumn]).className = "node-wall";
-    }, 30 * i);
+    }, 40 * i);
   }
+};
+
+const createWalledGraph = (graph, startNode, endNode) => {
+  setTimeout(() => {
+    graph.forEach((row, rowIndex) => {
+      return row.forEach((node, nodeIndex) => {
+        const currentNode = graph[rowIndex][nodeIndex];
+        if (!currentNode.start && !currentNode.end) {
+          setWall(graph, rowIndex, nodeIndex);
+          document.getElementById([rowIndex, nodeIndex]).className =
+            "node-wall";
+        }
+      });
+    });
+  });
 };

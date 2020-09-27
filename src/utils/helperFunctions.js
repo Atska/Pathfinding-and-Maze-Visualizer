@@ -46,6 +46,27 @@ export const setUpCostMap = (graph, startNode) => {
 };
 
 /**
+ * Simple function to filter the start and end nodes out of the wall
+ * This is only for frontend purposes, so you dont overwrite start and end nodes will walls
+ * @param {Array} wallList array of all wall nodes
+ * @param {Array} start [row, column] coordinates of the start node
+ * @param {Array} end [row, column] coordinates of the end node
+ * @returns {Array} filtered array
+ */
+export const filterStartAndEndNode = (wallList, start, end) => {
+  if (!wallList || !start || !end) return false;
+  let newArr = [];
+  for (let index = 0; index < wallList.length; index++) {
+    const element = wallList[index];
+    if (!equalityChecker(start, element) && !equalityChecker(end, element)) {
+      newArr.push(element);
+    }
+  }
+  wallList = newArr;
+  return wallList;
+};
+
+/**
  * Compares two array with two values [val1, val2] and checks if their values are the same
  * @param {Array} arr1 Array with two values -> [3, 3]
  * @param {Array} arr2 Array with two values -> [3, 3]
@@ -54,6 +75,19 @@ export const setUpCostMap = (graph, startNode) => {
 export const equalityChecker = (arr1, arr2) => {
   if (arr1[0] === arr2[0] && arr1[1] === arr2[1]) return true;
   return false;
+};
+
+/**
+ * Shuffles an array and returns shuffled array
+ * @param {Array} a Any array
+ * @returns shuffled array
+ */
+export const shuffleArray = (a) => {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 };
 
 export const createGraph = () => {

@@ -1,0 +1,56 @@
+.ControlPanel {
+  display: inline-flexbox;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 220px;
+  height: 565px;
+  background-color: #003153; /* Prussian Blue */
+  border-color: #003153;
+  border-style: solid;
+  border-radius: 15px;
+}
+
+.Search {
+  margin-top: 5px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.Maze {
+  margin-top: 3px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.Reset {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+p {
+  display: inline-flex;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+button {
+  background-color: #003153;
+  margin-bottom: 8px;
+  padding: 6px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 100%;
+  border: 2px white solid;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  text-align: center;
+}

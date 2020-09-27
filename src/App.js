@@ -1,7 +1,7 @@
 import React from "react";
 //Components
-import Field from "./components/Field";
-import Navbar from "./components/Navbar";
+import Field from "./components/Field.js";
+import Navbar from "./components/Navbar.js";
 // MaterialUI
 import { ThemeProvider } from "@material-ui/core/styles";
 // css
