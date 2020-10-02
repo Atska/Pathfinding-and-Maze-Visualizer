@@ -17,8 +17,8 @@ import BinaryTreeMaze from "../algorithms/BinaryTreeMaze.js";
 
 class Field extends Component {
   // graph size
-  rowsize = 21;
-  columnSize = 43;
+  rowsize = 25;
+  columnSize = 49;
 
   state = {
     graph: [],
@@ -222,7 +222,7 @@ class Field extends Component {
     let board = graph.map((row, rowIndex) => {
       return (
         // each row must be in a div so you can form a field in css
-        <div key={rowIndex}>
+        <div className="Row" key={rowIndex}>
           {row.map((node, nodeIndex) => {
             // destructuring node object
             const { row, column, wall, start, end } = node;

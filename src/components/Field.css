@@ -1,10 +1,16 @@
 .Field {
-  display: inline-block;
-  margin-top: 2rem;
-  margin-left: 1rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: center;
+  height: 100%;
+}
+
+.Row {
+  display: flex;
 }
 
 .Visualizer {
   display: flex;
-  align-items: flex-end;
+  justify-content: center;
 }

@@ -1,11 +1,8 @@
 .node {
   height: 25px;
   width: 25px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #003153;
-  display: inline-block;
-  margin-top: -3px;
+  border: solid 1px #003153;
+  display: inline-flex;
   cursor: pointer;
 }
 
@@ -13,11 +10,7 @@
   background: url(../images/nagetier.png) no-repeat center;
   height: 25px;
   width: 25px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #003153;
-  display: inline-block;
-  margin-top: -3px;
+  border: solid 1px #003153;
   cursor: pointer;
 }
 
@@ -25,11 +18,7 @@
   background: url(../images/kaese.png) no-repeat center;
   height: 25px;
   width: 25px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #003153;
-  display: inline-block;
-  margin-top: -3px;
+  border: solid 1px #003153;
   cursor: pointer;
 }
 
@@ -37,11 +26,7 @@
   background-color: #003153;
   height: 25px;
   width: 25px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #003153;
-  display: inline-block;
-  margin-top: -3px;
+  border: solid 1px #003153;
   cursor: pointer;
   transition: transform 0.2s linear;
   animation-name: WallAnimation;
@@ -59,11 +44,7 @@
   background-color: greenyellow;
   height: 25px;
   width: 25px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #003153;
-  display: inline-block;
-  margin-top: -3px;
+  border: solid 1px #003153;
   transition: transform 0.2s linear;
   animation-name: NodeAnimation;
   animation-duration: 0.6s;
@@ -83,11 +64,7 @@
   background-color: red;
   height: 25px;
   width: 25px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #003153;
-  display: inline-block;
-  margin-top: -3px;
+  border: solid 1px #003153;
   transition: transform 0.2s linear;
   animation-name: PathAnimation;
   animation-duration: 0.6s;

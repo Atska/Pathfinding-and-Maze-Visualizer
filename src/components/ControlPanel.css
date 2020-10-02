@@ -1,15 +1,14 @@
 .ControlPanel {
   display: inline-flexbox;
+  position: relative;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-top: 1vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
   width: 220px;
   height: 565px;
   background-color: #003153; /* Prussian Blue */
-  border-color: #003153;
-  border-style: solid;
   border-radius: 15px;
 }
 
