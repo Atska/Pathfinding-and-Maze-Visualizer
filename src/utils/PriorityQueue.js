@@ -1,17 +1,21 @@
 /**
- *
+ * A priority queue or min heap is a datastructure in an array which shuffles newly added
+ * values based on their priority. Smaller numbers mean higher priority
  */
 class PriorityQueue {
   constructor() {
     this.values = [];
   }
+  /**
+   * @returns {Array}
+   */
   get() {
     return this.values;
   }
   /**
-   *
-   * @param {*} val
-   * @param {*} priority
+   * Adds value to array.
+   * @param {Object} val Any object you want to store.
+   * @param {Number} priority Integer. Lower number means higher priority.
    */
   enqueue(val, priority) {
     let newNode = new Node(val, priority);
@@ -19,7 +23,7 @@ class PriorityQueue {
     this.bubbleUp();
   }
   /**
-   *
+   * Restructures array.
    */
   bubbleUp() {
     let idx = this.values.length - 1;

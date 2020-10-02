@@ -27,7 +27,6 @@ class Node extends Component {
       if (wall && !end && !start) return "node-wall";
       return "node";
     };
-    //HTML
     return (
       <div
         id={[row, column]}

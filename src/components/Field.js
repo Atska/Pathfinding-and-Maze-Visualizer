@@ -29,6 +29,7 @@ class Field extends Component {
     endNode: null,
   };
 
+  // set up field
   componentDidMount() {
     const newGraph = createGraph(
       this.rowsize,
@@ -64,9 +65,9 @@ class Field extends Component {
       deleteEndNode(graph, row, column);
       this.setState({ endNodeExists: false, endNode: null });
     }
-    // set walls
   };
 
+  // on mouse down set up or delete a wall
   onMouseDown = (row, column) => {
     const { startNodeExits, endNodeExists, graph, mouseIsClicked } = this.state;
     const { start, end, wall } = graph[row][column];
@@ -93,6 +94,7 @@ class Field extends Component {
     this.setState({ mouseIsClicked: false });
   };
 
+  //
   onMouseEnter = (row, column) => {
     const { startNodeExits, endNodeExists, graph, mouseIsClicked } = this.state;
     const { start, end, wall } = graph[row][column];
@@ -104,6 +106,7 @@ class Field extends Component {
     }
   };
 
+  // clears the board of wall and search nodes
   resetField() {
     const { graph } = this.state;
     graph.forEach((row, rowIndex) => {
@@ -123,6 +126,7 @@ class Field extends Component {
     });
   }
 
+  // clears the board of the search
   clearSearch() {
     const { graph } = this.state;
     graph.forEach((row, rowIndex) => {
@@ -190,7 +194,7 @@ class Field extends Component {
     if ((graph, startNode, endNode)) {
       const maze = new RecursiveBacktracking(graph, startNode, endNode);
       createWalledGraph(graph, startNode, endNode);
-      animateMaze(maze.runMaze(), graph, endNode);
+      setTimeout(() => animateMaze(maze.runMaze(), graph, endNode), 2000);
     }
   }
   visualizeTree() {
@@ -198,7 +202,7 @@ class Field extends Component {
     if ((graph, startNode, endNode)) {
       const maze = new BinaryTreeMaze(graph, startNode, endNode);
       createWalledGraph(graph, startNode, endNode);
-      animateMaze(maze.runMaze(), graph, endNode);
+      setTimeout(() => animateMaze(maze.runMaze(), graph, endNode), 2000);
     }
   }
 
@@ -333,7 +337,7 @@ const animateSearchProcess = (neighborList, shortestPath) => {
           animateShortestPath(shortestPath);
         }, 150);
       }
-    }, 20 * i);
+    }, 30 * i);
   }
 };
 
