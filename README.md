@@ -1,52 +1,57 @@
-# Read Me Template
+# Pathfinding and Maze visualizer
 
 ![Project Image](project-image-url)
 
-> This is a ReadMe template to help save you time and effort.
+> [>Link to App<](https://atska.github.io/visualizer/)
 
 ---
 
 ### Table of Contents
 You're sections headers will be used to reference location of destination.
 
-- [Description](#description)
+- [Introduction](#introduction)
 - [How To Use](#how-to-use)
-- [References](#references)
+- [Algorithm descriptions](#algorithm-descriptions)
 - [License](#license)
-- [Author Info](#author-info)
 
 ---
 
-## Description
+## Introduction
 
-Creating ReadMe's for your Github repository can be tedious.  I hope this template can save you time and effort as well as provide you with some consistency across your projects.
+This project is showcasing pathfinding and maze algorithms. At the beginning I was interested in the basics of software engineering and wanted to learn more about algorithms and data structures. At the end I did this fun, challenging, furiously frustrating yet so extremly rewarding project.
+
+#### What I learned
+- Algorithmic thinking: Slicing a problem in many different subproblems and solve each of them step by step.
+- Datastructures: Queues, stacks, heaps, sets and so on. When to use them and write one on your own if you need it.
+- Graph traversal: Must-know stuff like depth-first-search or breadth-first-search, writing recursive function and its pros and cons.
+- That I am still shit at css.
 
 #### Technologies
 
-- Technology 1
-- Technology 2
+- Javascript ES6
+- ReactJS
 
-[Back To The Top](#read-me-template)
+Note: This project was developed with Google Chrome and its not optimized for phone usage. It was written with a 27inch monitor and a 14inch" laptop.
+
+[Back To The Top](#pathfinding-and-maze-visualizer)
 
 ---
 
 ## How To Use
 
 #### Installation
+If you dont want test it with the [LINK](https://atska.github.io/visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start".
 
 
-
-#### API Reference
-
-```html
-    <p>dummy code</p>
-```
-[Back To The Top](#read-me-template)
+[Back To The Top](#pathfinding-and-maze-visualizer)
 
 ---
 
-## References
-[Back To The Top](#read-me-template)
+## Algorithm descriptions
+
+
+
+[Back To The Top](#pathfinding-and-maze-visualizer)
 
 ---
 
@@ -77,10 +82,3 @@ SOFTWARE.
 [Back To The Top](#read-me-template)
 
 ---
-
-## Author Info
-
-- Twitter - [@jamesqquick](https://twitter.com/jamesqquick)
-- Website - [James Q Quick](https://jamesqquick.com)
-
-[Back To The Top](#read-me-template)
