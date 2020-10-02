@@ -8,7 +8,9 @@ class Navbar extends Component {
       <div>
         <nav>
           <label id="title">Algorithm Visualizer</label>
-          <div className="git-link">Github</div>
+          <a href="https://github.com/Atska/visualizer">
+            <div className="git-link">Github</div>
+          </a>
         </nav>
       </div>
     );
