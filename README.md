@@ -24,7 +24,7 @@ This project is showcasing pathfinding and maze algorithms. At the beginning I w
 - Algorithmic thinking: Slicing a problem in many different subproblems and solve each of them step by step.
 - Datastructures: Queues, stacks, heaps, sets and so on. When to use them and write one on your own if you need it.
 - Graph traversal: Must-know stuff like depth-first-search or breadth-first-search, writing recursive function and its pros and cons.
-- That I am still shit at css.
+- That I am so bad at css.
 
 #### Technologies
 
@@ -49,7 +49,47 @@ If you dont want test it with the [LINK](https://atska.github.io/visualizer/) ab
 
 ## Algorithm descriptions
 
+```Pathfinding algorithms```
+#### Dijkstra´s Algorithm
+- Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+- Shortest path: Yes
+- Ancestor of all pathfinding algorithms. It is an uninformed algorithm meaning it doesnt use the location of the endnode to help its search process. The grid based 
+board makes its search process similar to breadth-first-search.
 
+#### A* Search Algorithm
+- Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
+- Shortest path: Yes
+- Heuristic: Manhattan distance
+- Dijkstra´s with a brain. A* is an informed algorithm and works very similar to Dijkstras with the exception of its heuristic function. This function determines which node you travel next. To implement this, a min heap / priority queue is mandatory. In this project you can only got left, right, top and bottom so the Manhatten distance was chosen.
+
+#### Greedy-Best-First-Search
+- Shortest path: No
+- Heuristic: Pythagorean Theorem
+- Similar to A*. It is greedy because it goes directly to the endnode. Its very fast but does not always guarantee the shortest path.
+
+#### Depth-First-Search
+- Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Tree_traversal)
+- Shortest path: No
+- Simple graph traversal algorithm. Terrible pathfinding algorithm. Its good at finding out whether there is a path to an endnode.
+
+#### Breadth-First-Search
+- Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Tree_traversal)
+- Shortest path: Yes
+- Simple graph traversal algorithm which gets the job of finding the shortest path done.
+
+
+```Maze Algorithms```
+#### Binary-Tree-Maze
+- Pseudo Code: [Hurna.io](https://hurna.io/academy/algorithms/maze_generator/binary.html)
+- Visualizes a binary tree data structure if you spin the maze 45°. Because of that the left and top of this maze will always be paths. There cannot be crossroads and all dead ends must point right or down.
+
+#### Recursive Backtracking
+- Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
+- This algorithm visualizes depth-first-search and backtracking wonderfully. However as given above this algorithm involves deep recursion which may cause stack overflow issues. 
+
+#### Recursive Division
+- Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
+- Great and complex algorithm. This algorithm slices a rectangle in half at a random position and keeps doing it recursivly until the rectangle is small enough so it cannot be sliced anymore.
 
 [Back To The Top](#pathfinding-and-maze-visualizer)
 
