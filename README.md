@@ -1,7 +1,5 @@
 # Pathfinding and Maze visualizer
 
-![Project Image](project-image-url)
-
 > [>Link to App<](https://atska.github.io/visualizer/)
 
 ---
