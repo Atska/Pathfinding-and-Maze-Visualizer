@@ -22,7 +22,7 @@ This project is showcasing pathfinding and maze algorithms. At the beginning I w
 - Algorithmic thinking: Slicing a problem in many different subproblems and solve each of them step by step.
 - Datastructures: Queues, stacks, heaps, sets and so on. When to use them and write one on your own if you need it.
 - Graph traversal: Must-know stuff like depth-first-search or breadth-first-search, writing recursive function and its pros and cons.
-- That I am so bad at css.
+- That css is hard.
 
 #### Technologies
 
