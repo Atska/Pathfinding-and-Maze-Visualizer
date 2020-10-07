@@ -1,4 +1,4 @@
-import { filterStartAndEndNode } from "../utils/helperFunctions.js";
+import { filterStartAndEndNode } from "../../utils/helperFunctions.js";
 /**
  * The recursive divison is an algorithm which splits a grid either horizontal or vertical.
  * You have to determine a random coordinate and draw the wall.

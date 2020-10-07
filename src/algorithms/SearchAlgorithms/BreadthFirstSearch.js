@@ -1,5 +1,5 @@
-import { equalityChecker, getNeighbors } from "../utils/helperFunctions.js";
-import Set from "../utils/Set.js";
+import { equalityChecker, getNeighbors } from "../../utils/helperFunctions.js";
+import Set from "../../utils/Set.js";
 /**
  * The breadth-first-search is a classic tree or graph traversal algorithm.
  * It is an uninformed algorithm which guarantees the shortest path.

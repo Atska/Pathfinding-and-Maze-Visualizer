@@ -1,8 +1,8 @@
 import {
   shuffleArray,
   filterStartAndEndNode,
-} from "../utils/helperFunctions.js";
-import Set from "../utils/Set.js";
+} from "../../utils/helperFunctions.js";
+import Set from "../../utils/Set.js";
 
 /**
  * This algorithm is based on the binary tree data structure.

@@ -1,4 +1,4 @@
-import { equalityChecker, getNeighbors } from "../utils/helperFunctions.js";
+import { equalityChecker, getNeighbors } from "../../utils/helperFunctions.js";
 /**
  * The depth-first-search is a classic algorithm for traveling trees or graphs.
  * Its not a good algorithm for pathfinding and rarely delivers the shortest path.

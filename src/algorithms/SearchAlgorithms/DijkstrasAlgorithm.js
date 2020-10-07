@@ -1,4 +1,4 @@
-import { getNeighbors, equalityChecker } from "../utils/helperFunctions.js";
+import { getNeighbors, equalityChecker } from "../../utils/helperFunctions.js";
 
 /**
  * Classic dijkstras is an algorithm for finding the shortest path between 2 nodes.

@@ -4,16 +4,18 @@ import Node from "./Node.js";
 import ControlPanel from "./ControlPanel.js";
 
 // CSS
-import "./Field.css";
-// Algorithms
-import AStar from "../algorithms/A_Star.js";
-import DepthFirstSearch from "../algorithms/DepthFirstSearch.js";
-import GreedyBFS from "../algorithms/GreedyBestFirstSearch";
-import Dijkstras from "../algorithms/DijkstrasAlgorithm.js";
-import RecursiveBacktracking from "../algorithms/RecursiveBacktracking.js";
-import RecursiveDivision from "../algorithms/RecursiveDivision.js";
-import BreadthFirstSearch from "../algorithms/BreadthFirstSearch.js";
-import BinaryTreeMaze from "../algorithms/BinaryTreeMaze.js";
+import "./Visualizer.css";
+// Search Algorithms
+import AStar from "../algorithms/SearchAlgorithms/A_Star.js";
+import Dijkstras from "../algorithms/SearchAlgorithms/DijkstrasAlgorithm.js";
+import GreedyBFS from "../algorithms/SearchAlgorithms/GreedyBestFirstSearch";
+import DepthFirstSearch from "../algorithms/SearchAlgorithms/DepthFirstSearch.js";
+import BreadthFirstSearch from "../algorithms/SearchAlgorithms/BreadthFirstSearch.js";
+
+// Maze Algorithms
+import BinaryTreeMaze from "../algorithms/MazeAlgorithms/BinaryTreeMaze.js";
+import RecursiveDivision from "../algorithms/MazeAlgorithms/RecursiveDivision.js";
+import RecursiveBacktracking from "../algorithms/MazeAlgorithms/RecursiveBacktracking.js";
 
 class Field extends Component {
   // graph size

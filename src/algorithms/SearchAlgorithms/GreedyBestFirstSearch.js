@@ -1,9 +1,9 @@
-import { PriorityQueue } from "../utils/PriorityQueue.js";
+import { PriorityQueue } from "../../utils/PriorityQueue.js";
 import {
   getNeighbors,
   setUpCostMap,
   equalityChecker,
-} from "../utils/helperFunctions.js";
+} from "../../utils/helperFunctions.js";
 
 /**
  * The Greedy Best-First-Search determines the shortest path between 2 nodes

@@ -1,4 +1,4 @@
-import { shuffleArray } from "../utils/helperFunctions.js";
+import { shuffleArray } from "../../utils/helperFunctions.js";
 
 /**
  * This algortihm uses a depth-first-search algorithm to traverse the graph.
