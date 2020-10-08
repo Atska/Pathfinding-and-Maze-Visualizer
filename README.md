@@ -3,8 +3,8 @@
 > [>Link to App<](https://atska.github.io/visualizer/)
 
 #### How to use
-- Click on the board to initiate the start (A mouse) 🐭 .
-- Click on the board again to initiate the end (cheese) 🧀 .
+- Click on the board to initiate the start 🐭 
+- Click on the board again to initiate the end 🧀 
 - If both are there you can draw walls.
 - Click on the search algorithms to find the path (if there is any).
 
