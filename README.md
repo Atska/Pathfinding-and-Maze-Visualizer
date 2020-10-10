@@ -1,6 +1,7 @@
 # Pathfinding and Maze visualizer
 
-> [>Link to App<](https://atska.github.io/visualizer/)
+|[>Link to App<](https://atska.github.io/visualizer/)|
+|---|
 
 #### How to use
 - Click on the board to initiate the start 🐭 
@@ -12,9 +13,9 @@
 
 ### Table of Contents
 You're sections headers will be used to reference location of destination.
-
+- [How To use](#how-to-use)
 - [Introduction](#introduction)
-- [How To Use](#how-to-use)
+- [How To Install](#how-to-install)
 - [Algorithm descriptions](#algorithm-descriptions)
 - [License](#license)
 
