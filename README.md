@@ -9,6 +9,7 @@
 
 - Click on the board to initiate the start 🐰 
 - Click on the board again to initiate the end 🥕 
+
 |[>Link to App<](https://atska.github.io/visualizer/)|
 ---
 
