@@ -8,7 +8,9 @@
 #### How to use
 
 - Click on the board to initiate the start 🐰 
-- Click on the board again to initiate the end 🥕 
+- Click on the board again to initiate the end 🥕
+- Draw walls or chose a maze algorithm
+- Select your search algorithm and help the rabbit find the carrot!
 ---
 
 ### Table of Contents
@@ -36,9 +38,7 @@ This project is showcasing pathfinding and maze algorithms. At the beginning I w
 - Javascript ES6
 - ReactJS
 
-Note: This project was developed with Google Chrome and its not optimized for phone usage. It was written with a 27inch monitor and a 14inch" laptop.
-
-
+[Back To The Top](#pathfinding-and-maze-visualizer)
 
 ---
 
