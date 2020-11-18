@@ -1,20 +1,36 @@
 # Pathfinding and Maze visualizer
 
+<<<<<<< HEAD
 | [>Link to App<](https://atska.github.io/Pathfinding-and-Maze-Visualizer/) |
 | ------------------------------------------------------------------------- |
 
+=======
+>>>>>>> a2d376b1ffaf2088ddf7aa23dc723c6d8dd37232
 
-#### How to use
+| [>Link to App<](https://atska.github.io/Pathfinding-and-Maze-Visualizer/) |
+| ---------------------------------------------------- |
 
+<<<<<<< HEAD
 - Click on the board to initiate the start 🐰
 - Click on the board again to initiate the end 🥕
 - Draw walls or chose a maze algorithm
 - Select your search algorithm and help the rabbit find the carrot!
+=======
 
+#### How to use
+>>>>>>> a2d376b1ffaf2088ddf7aa23dc723c6d8dd37232
+
+- Click on the board to initiate the start 🐰 
+- Click on the board again to initiate the end 🥕
+- Draw walls or chose a maze algorithm
+- Select your search algorithm and help the rabbit find the carrot!
 ---
 
 ### Table of Contents
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2d376b1ffaf2088ddf7aa23dc723c6d8dd37232
 - [How To use](#how-to-use)
 - [Introduction](#introduction)
 - [How To Install](#how-to-install)
@@ -47,7 +63,11 @@ This project is showcasing pathfinding and maze algorithms. At the beginning I w
 
 #### Installation
 
+<<<<<<< HEAD
 If you do not want test it with the [LINK](https://atska.github.io/Pathfinding-and-Maze-Visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start".
+=======
+If you do not want test it with the [LINK](https://atska.github.io/Pathfinding-and-Maze-Visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start". 
+>>>>>>> a2d376b1ffaf2088ddf7aa23dc723c6d8dd37232
 
 [Back To The Top](#pathfinding-and-maze-visualizer)
 
@@ -64,6 +84,7 @@ If you do not want test it with the [LINK](https://atska.github.io/Pathfinding-a
 - Ancestor of all pathfinding algorithms. It is an uninformed algorithm meaning it doesnt use the location of the end node to help its search process. The grid based
   board makes its search process similar to breadth-first-search.
 
+<<<<<<< HEAD
 #### A\* Search Algorithm
 
 - Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
@@ -79,12 +100,29 @@ If you do not want test it with the [LINK](https://atska.github.io/Pathfinding-a
 
 #### Depth-First-Search
 
+=======
+#### A* Search Algorithm
+- Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
+- Shortest path: Yes
+- Heuristic: Manhattan distance
+- Dijkstra with a brain. A* is an informed algorithm and works very similar to Dijkstras with the exception of its heuristic function. This function determines which node you travel next. To implement this, a min heap / priority queue is mandatory. In this project you can only got left, right, top and bottom so the Manhatten distance was chosen.
+
+#### Greedy-Best-First-Search
+- Shortest path: No
+- Heuristic: Pythagorean Theorem
+- Similar to A*. It is greedy because it goes directly to the end node. It is very fast but does not always guarantee the shortest path.
+
+#### Depth-First-Search
+>>>>>>> a2d376b1ffaf2088ddf7aa23dc723c6d8dd37232
 - Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Tree_traversal)
 - Shortest path: No
 - Simple graph traversal algorithm. Terrible pathfinding algorithm. It is good at finding out whether there is a path to an end node.
 
 #### Breadth-First-Search
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2d376b1ffaf2088ddf7aa23dc723c6d8dd37232
 - Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Tree_traversal)
 - Shortest path: Yes
 - Simple graph traversal algorithm which gets the job of finding the shortest path done.
@@ -92,17 +130,20 @@ If you do not want test it with the [LINK](https://atska.github.io/Pathfinding-a
 `Maze Algorithms`
 
 #### Recursive Backtracking
-
 - Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
 - This algorithm visualizes depth-first-search and backtracking wonderfully. However as given above this algorithm involves deep recursion which may cause stack overflow issues.
 
 #### Binary-Tree-Maze
 
+<<<<<<< HEAD
 - Pseudo Code: [Hurna.io](https://hurna.io/academy/algorithms/maze_generator/binary.html)
 - Visualizes a binary tree data structure if you spin the maze 45°. Because of that the left and top of this maze will always be paths. No crossroads can exists and all dead ends must point right or down.
 
 #### Recursive Division
 
+=======
+#### Recursive Division
+>>>>>>> a2d376b1ffaf2088ddf7aa23dc723c6d8dd37232
 - Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
 - Great and complex algorithm. This algorithm slices a rectangle in half at a random position and keeps doing it recursively until the rectangle is small enough so it cannot be sliced anymore.
 
