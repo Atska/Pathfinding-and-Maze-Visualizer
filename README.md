@@ -7,25 +7,13 @@
 
 #### How to use
 
-- Click on the board to initiate the start 🐭
-- Click on the board again to initiate the end 🧀
+- Click on the board to initiate the start 🐰 
+- Click on the board again to initiate the end 🥕 
 =======
 |[>Link to App<](https://atska.github.io/visualizer/)|
-|---|
-
-#### How to use
-- Click on the board to initiate the start 🐭 
-- Click on the board again to initiate the end 🧀 
->>>>>>> 133a67222cce44d43bb93a4be57e5012132c0ce8
-- If both are there you can draw walls.
-- Click on the search algorithms to find the path (if there is any).
-
 ---
 
 ### Table of Contents
-
-=======
->>>>>>> 133a67222cce44d43bb93a4be57e5012132c0ce8
 - [How To use](#how-to-use)
 - [Introduction](#introduction)
 - [How To Install](#how-to-install)
@@ -62,10 +50,7 @@ Note: This project was developed with Google Chrome and its not optimized for ph
 
 If you do not want test it with the [LINK](https://atska.github.io/visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start".
 
-If you do not want test it with the [LINK](https://atska.github.io/visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start".
-
 [Back To The Top](#pathfinding-and-maze-visualizer)
-
 ---
 
 ## Algorithm descriptions
@@ -101,6 +86,7 @@ If you do not want test it with the [LINK](https://atska.github.io/visualizer/) 
 - Simple graph traversal algorithm which gets the job of finding the shortest path done.
 
 `Maze Algorithms`
+
 #### Recursive Backtracking
 - Pseudo Code: [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
 - This algorithm visualizes depth-first-search and backtracking wonderfully. However as given above this algorithm involves deep recursion which may cause stack overflow issues.
