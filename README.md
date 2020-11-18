@@ -1,7 +1,7 @@
 # Pathfinding and Maze visualizer
 
 
-| [>Link to App<](https://atska.github.io/visualizer/) |
+| [>Link to App<](https://atska.github.io/Pathfinding-and-Maze-Visualizer/) |
 | ---------------------------------------------------- |
 
 
@@ -46,7 +46,7 @@ This project is showcasing pathfinding and maze algorithms. At the beginning I w
 
 #### Installation
 
-If you do not want test it with the [LINK](https://atska.github.io/visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start". 
+If you do not want test it with the [LINK](https://atska.github.io/Pathfinding-and-Maze-Visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start". 
 
 [Back To The Top](#pathfinding-and-maze-visualizer)
 
