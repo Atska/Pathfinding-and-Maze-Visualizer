@@ -48,7 +48,7 @@ class ControlPanel extends Component {
         <div className="search">
           <p>Search Algorithms</p>
           <select onChange={handleSearchChange}>
-            <option value="Astar">AStar</option>
+            <option value="AStar">AStar</option>
             <option value="Dijkstras">Dijkstras</option>
             <option value="GreedyBFS">GreedyBFS</option>
             <option value="DepthFirstSearch">DepthFirstSearch</option>
