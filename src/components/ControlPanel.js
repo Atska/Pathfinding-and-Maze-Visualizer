@@ -5,7 +5,7 @@ import "./ControlPanel.css";
 class ControlPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { searchAlgo: "AStar", mazeAlgo: "RecursiveDivision" };
   }
   render() {
     const {
@@ -20,33 +20,53 @@ class ControlPanel extends Component {
       resetField,
       clearSearch,
     } = this.props;
+    const handleSearchChange = (event) => {
+      this.setState({ searchAlgo: event.target.value });
+    };
 
+    const handleSearchClick = () => {
+      const { searchAlgo } = this.state;
+      if (searchAlgo === "AStar") return visualizeAStar();
+      if (searchAlgo === "Dijkstras") return visualizeDijkstras();
+      if (searchAlgo === "GreedyBFS") return visualizeGreedyBFS();
+      if (searchAlgo === "DepthFirstSearch") return visualizeDFS();
+      if (searchAlgo === "BreadthFirstSearch") return visualizeBFS();
+    };
+
+    const handeMazeChange = (event) => {
+      this.setState({ mazeAlgo: event.target.value });
+    };
+
+    const handleMazeClick = () => {
+      const { mazeAlgo } = this.state;
+      if (mazeAlgo === "RecursiveDivision") return visualizeDivMaze();
+      if (mazeAlgo === "BinaryTreeMaze") return visualizeTree();
+      if (mazeAlgo === "RecursiveBacktracking") return visualizeMaze();
+    };
     return (
       <div className="ControlPanel">
-        <div className="Search">
+        <div className="search">
           <p>Search Algorithms</p>
-          <br />
-          <button onClick={() => visualizeAStar()}>AStar</button>
-          <br />
-          <button onClick={() => visualizeDijkstras()}>Dijkstra's</button>
-          <br />
-          <button onClick={() => visualizeGreedyBFS()}>
-            GreedyBestFirstSearch
-          </button>
-          <br />
-          <button onClick={() => visualizeDFS()}>DepthFirstSearch</button>
-          <br />
-          <button onClick={() => visualizeBFS()}>BreadthFirstSearch</button>
+          <select onChange={handleSearchChange}>
+            <option value="Astar">AStar</option>
+            <option value="Dijkstras">Dijkstras</option>
+            <option value="GreedyBFS">GreedyBFS</option>
+            <option value="DepthFirstSearch">DepthFirstSearch</option>
+            <option value="BreadthFirstSearch">BreadthFirstSearch</option>
+          </select>
+          <button onClick={handleSearchClick}>Search</button>
         </div>
-        <div className="Maze">
+        <div className="maze">
           <p>Maze Algorithms</p>
-          <button onClick={() => visualizeTree()}>BinaryTreeMaze</button>
-          <button onClick={() => visualizeMaze()}>RecursiveBacktracking</button>
-          <button onClick={() => visualizeDivMaze()}>RecursiveDivision</button>
+          <select onChange={handeMazeChange}>
+            <option value="RecursiveDivision">RecursiveDivision</option>
+            <option value="BinaryTreeMaze">BinaryTreeMaze</option>
+            <option value="RecursiveBacktracking">RecursiveBacktracking</option>
+          </select>
+          <button onClick={handleMazeClick}>Choose</button>
         </div>
-        <div className="Reset">
+        <div className="reset">
           <button onClick={() => resetField()}>Reset Field</button>
-          <br />
           <button onClick={() => clearSearch()}>Clear Search</button>
         </div>
       </div>

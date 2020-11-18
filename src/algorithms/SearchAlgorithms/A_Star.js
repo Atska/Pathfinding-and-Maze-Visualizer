@@ -22,8 +22,6 @@ class AStar {
     this.graph = graph;
     this.startNode = startNode;
     this.endNode = endNode;
-    this.result = [];
-    this.visitedNodes = [];
   }
 
   shortestPath() {
@@ -31,6 +29,8 @@ class AStar {
     const start = [this.startNode.row, this.startNode.column];
     const end = [this.endNode.row, this.endNode.column];
     let prevNode = { start: null };
+    const result = [];
+    const visitedNodes = [];
     let queue = new PriorityQueue();
     queue.enqueue(start, 0);
     // setUp distances grid in a hashmap -> distanceMap[[0, 0]]
@@ -46,11 +46,11 @@ class AStar {
       if (equalityChecker(curr_node, end)) {
         // traverse the prevNode object to get all coordinates in an Array
         while (prevNode[curr_node]) {
-          this.result.push(curr_node);
+          result.push(curr_node);
           curr_node = prevNode[curr_node];
         }
         // Order the array from start to end node
-        this.result.reverse();
+        result.reverse();
         break;
       }
 
@@ -71,7 +71,7 @@ class AStar {
               !this.graph[neighborList[i][0]][neighborList[i][1]].wall &&
               !equalityChecker(neighborList[i], end)
             )
-              this.visitedNodes.push(neighborList[i]);
+              visitedNodes.push(neighborList[i]);
             costMap[neighborList[i]] = { G: G };
             prevNode[neighborList[i]] = curr_node;
             queue.enqueue(neighborList[i], F);
@@ -79,7 +79,7 @@ class AStar {
         }
       }
     }
-    return { shortestPath: this.result, visitedNodes: this.visitedNodes };
+    return { shortestPath: result, visitedNodes: visitedNodes };
   }
 
   ManhattenDistance(node, end) {

@@ -90,17 +90,6 @@ export const shuffleArray = (a) => {
   return a;
 };
 
-export const createNode = (row, column) => {
-  const nodeSchema = {
-    row: row,
-    column: column,
-    wall: false,
-    start: false,
-    end: false,
-  };
-  return nodeSchema;
-};
-
 export const createGraph = () => {
   const graph = [];
   let rowSize = 21;
@@ -115,4 +104,15 @@ export const createGraph = () => {
     graph.push(currentRow);
   }
   return graph;
+};
+
+export const createNode = (row, column) => {
+  const nodeSchema = {
+    row: row,
+    column: column,
+    wall: false,
+    start: false,
+    end: false,
+  };
+  return nodeSchema;
 };

@@ -1,55 +1,35 @@
 .ControlPanel {
-  display: inline-flexbox;
-  position: relative;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  margin-top: 1vh;
-  margin-left: 1vw;
-  margin-right: 1vw;
-  width: 220px;
-  height: 565px;
-  background-color: #003153; /* Prussian Blue */
-  border-radius: 15px;
-}
-
-.Search {
-  margin-top: 5px;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.Maze {
-  margin-top: 3px;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.Reset {
-  margin-top: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-p {
-  display: inline-flex;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-button {
-  background-color: #003153;
-  margin-bottom: 8px;
-  padding: 6px 15px;
-  cursor: pointer;
-  border-radius: 6px;
+  justify-content: space-evenly;
+  background: #003a64;
+  height: 50px;
   width: 100%;
-  border: 2px white solid;
-  color: white;
+}
+
+.ControlPanel button {
+  margin: 0 5px;
+  height: 20px;
+}
+
+.ControlPanel p {
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0 0;
+}
+
+.reset {
+  display: flex;
+  align-items: center;
+}
+
+.ControlPanel button {
+  color: ghostwhite;
+  background: #003a64;
+  border: 1px solid ghostwhite;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
 }

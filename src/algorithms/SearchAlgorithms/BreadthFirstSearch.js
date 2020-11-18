@@ -13,14 +13,13 @@ class BreadthFirstSearch {
     this.graph = graph;
     this.startNode = startNode;
     this.endNode = endNode;
-    this.result = [];
-    this.visitedNodes = new Set();
   }
 
   search() {
     const start = [this.startNode.row, this.startNode.column];
     const end = [this.endNode.row, this.endNode.column];
-
+    const result = [];
+    const visitedNodes = new Set();
     const queue = [start];
     const previousNodes = {};
     const visited = this.setUpVisitedMap(this.graph, this.startNode);
@@ -35,11 +34,11 @@ class BreadthFirstSearch {
       if (equalityChecker(currentNode, end)) {
         // traverse the prevNode object to get all coordinates in an Array
         while (previousNodes[currentNode]) {
-          this.result.push(currentNode);
+          result.push(currentNode);
           currentNode = previousNodes[currentNode];
         }
         // Order the array from start to end node
-        this.result.reverse();
+        result.reverse();
         break;
       }
       // get neighbors of the current node
@@ -51,11 +50,11 @@ class BreadthFirstSearch {
           queue.push(elem);
           previousNodes[elem] = currentNode;
           if (!equalityChecker(currentNode, start))
-            this.visitedNodes.add(currentNode);
+            visitedNodes.add(currentNode);
         }
       }
     }
-    return { path: this.result, visitedNodes: this.visitedNodes.get() };
+    return { path: result, visitedNodes: visitedNodes.get() };
   }
 
   setUpVisitedMap(graph, startNode) {
