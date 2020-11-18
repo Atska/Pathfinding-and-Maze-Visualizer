@@ -9,7 +9,6 @@
 
 - Click on the board to initiate the start 🐰 
 - Click on the board again to initiate the end 🥕 
-=======
 |[>Link to App<](https://atska.github.io/visualizer/)|
 ---
 
@@ -40,7 +39,7 @@ This project is showcasing pathfinding and maze algorithms. At the beginning I w
 
 Note: This project was developed with Google Chrome and its not optimized for phone usage. It was written with a 27inch monitor and a 14inch" laptop.
 
-[Back To The Top](#pathfinding-and-maze-visualizer)
+
 
 ---
 
@@ -48,9 +47,10 @@ Note: This project was developed with Google Chrome and its not optimized for ph
 
 #### Installation
 
-If you do not want test it with the [LINK](https://atska.github.io/visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start".
+If you do not want test it with the [LINK](https://atska.github.io/visualizer/) above you can always download this project. To host it locally use your terminal and write "npm install" and after that "npm start". 
 
 [Back To The Top](#pathfinding-and-maze-visualizer)
+
 ---
 
 ## Algorithm descriptions
